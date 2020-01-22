@@ -1,0 +1,66 @@
+homem(ivo).
+homem(gil).
+homem(rai).
+homem(noe).
+homem(ary).
+
+mulher(ana).
+mulher(bia).
+mulher(eva).
+mulher(clo).
+mulher(lia).
+mulher(gal).
+
+gerou(ivo,eva).
+gerou(ana,eva).
+
+gerou(gil,clo).
+gerou(gil,rai).
+gerou(gil,ary).
+gerou(bia,clo).
+gerou(bia,rai).
+gerou(bia,ary).
+
+gerou(rai,noe).
+gerou(eva,noe).
+
+gerou(ary,gal).
+gerou(lia,gal).
+
+pai(X,Y):-
+    gerou(X,Y),homem(X).
+mae(X,Y):-
+    gerou(X,Y),mulher(X).
+
+filho(X,Y):-
+    gerou(Y,X),homem(X).
+filha(X,Y):-
+    gerou(Y,X),mulher(X).
+
+irmao(X,Y):-
+    gerou(Z,X),gerou(Z,Y), X\=Y.
+
+tio(X,Z):-
+    irmao(X,Y),gerou(Y,Z),homem(X).
+
+tia(X,Z):-
+    irmao(X,Y),gerou(Y,Z),mulher(X).
+
+
+avo(X,Z):-
+    gerou(X,Y),gerou(Y,Z),homem(X).
+avof(X,Z):-
+    gerou(X,Y),gerou(Y,Z),mulher(X).
+
+
+
+primo(X,Y):-
+    tio(Z,X),gerou(Z,Y),X\=Y,homem(X).
+prima(X,Y):-
+    tio(Z,X),gerou(Z,Y),X\=Y,mulher(X).
+
+feliz(X):-
+    gerou(X,Y).
+
+casal(X,Y):-
+    gerou(X,Z),gerou(Y,Z).

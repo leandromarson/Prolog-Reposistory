@@ -1,0 +1,28 @@
+%fatos
+gerou(kelly,maria).
+gerou(cleber,maria).
+gerou(cleber,bruna).
+gerou(maria,julia).
+gerou(maria,pedro).
+gerou(pedro,lucas).
+
+feminino(kelly).
+feminino(maria).
+feminino(bruna).
+feminino(julia).
+masculino(cleber).
+masculino(pedro).
+masculino(lucas).
+%regras
+filho(Y,X) :-
+           gerou(X,Y).
+
+irmao(X,Y) :-
+    gerou(Z,X),gerou(Z,Y).
+
+avo(X,Z):-
+    gerou(X,Y),gerou(Y,Z).
+
+bisavo(W,Z):-
+    gerou(W,X),gerou(X,Y),gerou(Y,Z).
+
